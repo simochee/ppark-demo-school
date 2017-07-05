@@ -1,0 +1,11 @@
+{
+  "name": "ppark-demo-school",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "PORT=43011 NODE_ENV=development gulp dev"
+  },
+  "repository": "https://github.com/simochee/ppark-demo-school.git",
+  "author": "Ryoya Tamura <simochee@gmail.com>",
+  "license": "MIT"
+}
