@@ -16,6 +16,15 @@ module.exports = {
                     });
             });
         },
+        add: (data) => {
+            return new Promise((resolve, reject) => {
+                user.add(db, data)
+                    .then(resolve)
+                    .catch((err) => {
+                        reject(err);
+                    });
+            });
+        },
         update: (data) => {
             return new Promise((resolve, reject) => {
                 user.update(db, data)
