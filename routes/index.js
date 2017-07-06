@@ -131,7 +131,7 @@ router.get('/entry/:parking_id/:stall_id', (req, res) => {
  * 入庫処理
  */
 router.post('/entry', (req, res) => {
-  model.parking.entry(req.body.stall_id)
+  model.parking.entry(req.session.user, req.body.stall_id)
     .then(() => {
       res.redirect(`/entry/confirm/${req.body.parking_id}/${req.body.stall_id}`)
     });
