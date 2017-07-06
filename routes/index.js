@@ -160,4 +160,21 @@ router.post('/leave', (req, res) => {
     });
 });
 
+/**
+ * ポイントチャージ
+ */
+router.get('/charge', (req, res) => {
+  res.render('client/charge', res.args);
+});
+
+/**
+ * チャージ処理
+ */
+router.post('/charge', (req, res) => {
+  model.point.change(req.session.user, req.body.point)
+    .then(() => {
+      res.redirect(`/?msg=charge.${req.body.point}`);
+    });
+});
+
 module.exports = router;
