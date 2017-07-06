@@ -44,8 +44,10 @@ router.use((req, res, next) => {
 });
 
 /**
- * 入庫先
+ * 駐車場選択
  */
-
+router.use((req, res, next) => {
+  
+});
 
 module.exports = router;

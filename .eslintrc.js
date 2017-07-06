@@ -41,6 +41,8 @@ module.exports = {
         "no-console": 1,
         // １行の文字数を制限
         "max-len": [0, {"ignoreStrings": true, "ignoreTemplateLiterals": true}],
+        // 改行のスタイルの指定を無視する
+        "linebreak-style": 0,
     },
     "plugins": [
     ],
