@@ -137,4 +137,27 @@ router.post('/entry', (req, res) => {
     });
 });
 
+/**
+ * 出庫前確認
+ */
+router.get('/leave', (req, res) => {
+  model.stall.get(res.args.user.stall_id)
+    .then((result) => {
+      res.render('clinet/leave', res.args);
+    })
+    .catch((err) => {
+      res.redirect('/');
+    });
+});
+
+/**
+ * 出庫処理
+ */
+router.post('/leave', (req, res) => {
+  model.parking.leave(req.session.user)
+    .then(() => {
+      res.redirect(`/?msg=leave`);
+    });
+});
+
 module.exports = router;
