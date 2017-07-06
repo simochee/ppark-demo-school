@@ -34,8 +34,9 @@ router.get('/signin', (req, res, next) => {
  * サインイン処理
  */
 router.post('/signin', (req, res, next) => {
-  model.auth.signin(req.body.id, req.body.password)
+  model.auth(req.body.id, req.body.password)
     .then(() => {
+      req.session.user = req.body.id;
       res.redirect('/?msg=login');
     })
     .catch((err) => {
@@ -64,6 +65,7 @@ router.post('/signup', (req, res, next) => {
     password: req.body.password,
   })
     .then(() => {
+      req.session.user = req.body.id;
       res.redirect('/?msg=welcome');
     })
     .catch((err) => {
@@ -72,9 +74,23 @@ router.post('/signup', (req, res, next) => {
 });
 
 /**
+ * サインアウト
+ */
+router.get('/signout', (req, res, next) => {
+  if(!req.session.user) {
+    res.redirect('/signin');
+  }
+  req.session.user = null;
+  res.redirect('/?msg=signout');
+});
+
+/**
  * サインイン認証
  */
 router.use((req, res, next) => {
+  if(!req.session.user) {
+    res.redirect(`/signin?redirect=${req.url}`);
+  }
   next();
 });
 

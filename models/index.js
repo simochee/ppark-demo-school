@@ -1,6 +1,7 @@
 const sqlite3 = require('sqlite3');
 const db = new sqlite3.Database(`${__dirname}/db.sqlite3`);
 
+const auth = require('./auth');
 const user = require('./user');
 
 module.exports = {
@@ -44,7 +45,13 @@ module.exports = {
             });
         },
     },
-    auth: {
-
+    auth: (userId) => {
+        return new Promise((resolve, reject) => {
+            auth(db, userId)
+                .then(resolve)
+                .catch((err) => {
+                    reject(err);
+                });
+        });
     },
 };
