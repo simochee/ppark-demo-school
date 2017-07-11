@@ -173,8 +173,19 @@ router.get('/charge', (req, res) => {
 router.post('/charge', (req, res) => {
   model.point.change(req.session.user, req.body.point)
     .then(() => {
-      res.redirect(`/?msg=charge.${req.body.point}`);
+      res.redirect(`/?msg=charged${req.body.point}`);
     });
+});
+
+/**
+ * エラーハンドリング
+ * 深刻なエラー（SQLエラーとか）が発生したら表示
+ */
+router.get('/error', (req, res) => {
+  res.args.error = {
+    msg: req.query.msg,
+  };
+  res.render('client/error', res.args);
 });
 
 module.exports = router;
